@@ -1,11 +1,8 @@
-// employee_list_screen.dart
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../providerservice.dart';
 import 'employee_detials_screen.dart';
-// import 'employee_provider.dart';
-// import 'employee_model.dart';
 
 class EmployeeListScreen extends StatefulWidget {
   @override
@@ -17,9 +14,12 @@ class _EmployeeListScreenState extends State<EmployeeListScreen> {
 
   @override
   void initState() {
+
     super.initState();
+    print("init state");
     final employeeProvider = Provider.of<EmployeeProvider>(context, listen: false);
     employeeProvider.fetchEmployees();
+
   }
 
   @override
@@ -49,15 +49,25 @@ class _EmployeeListScreenState extends State<EmployeeListScreen> {
             child: ListView.builder(
               itemCount: filteredEmployees.length,
               itemBuilder: (context, index) {
+
                 final employee = filteredEmployees[index];
                 return ListTile(
-                  leading: Image.network('${employee.profileImage}'),
+                  leading: employee.profileImage==null?CircleAvatar(
+                    radius: 30,
+                    backgroundColor: Colors.brown.shade800,
+                    child: Center(child: Icon(Icons.person)),
+                  ):CircleAvatar(
+                    backgroundImage: NetworkImage(
+                        '${employee.profileImage}'),
+                    radius: 30,
+                  ),
+                  // Image.network('${employee.profileImage}'),
                   title: Text(employee.name),
                   subtitle: Text('${employee.company?.name}'),
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => EmployeeDetailsScreen(employee: employee)),
+                      MaterialPageRoute(builder: (context) => ProfileApp(employee: employee)),
                     );
                   },
                 );

@@ -1,9 +1,7 @@
-// employee_database.dart
+
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
-// import 'employeeJson.dart';
 import 'jsn/Employee.dart';
-// import 'employee_model.dart';
 
 class EmployeeDatabase {
   static const _tableName = 'employees';
@@ -13,19 +11,7 @@ class EmployeeDatabase {
     final path = join(databasesPath, 'employees.db');
     return openDatabase(path, version: 1,
         onCreate: (Database db, int version) async {
-          await db.execute('''
-        CREATE TABLE $_tableName (
-          id INTEGER PRIMARY KEY,
-          profileImage TEXT,
-          name TEXT,
-          username TEXT,
-          email TEXT,
-          address TEXT,
-          phone TEXT,
-          website TEXT,
-          companyName TEXT
-        )
-      ''');
+          await db.execute('CREATE TABLE $_tableName (id INTEGER PRIMARY KEY,profileImage TEXT,name TEXT,username TEXT,email TEXT,address TEXT,phone TEXT,website TEXT,company TEXT)');
         });
   }
 
@@ -54,7 +40,7 @@ class EmployeeDatabase {
         address: maps[index]['address'],
         phone: maps[index]['phone'],
         website: maps[index]['website'],
-        companyName: maps[index]['companyName'],
+        company: maps[index]['company'],
       );
     });
   }

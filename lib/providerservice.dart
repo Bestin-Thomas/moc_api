@@ -1,13 +1,13 @@
-// employee_provider.dart
+
 import 'package:flutter/material.dart';
-// import 'employee_database.dart';
-// import 'employee_model.dart';
-// import 'model/employeeJson.dart';
+import 'package:moc_api/service/apiservice.dart';
 import 'model/employeedatabase.dart';
 import 'model/jsn/Employee.dart';
 
+
 class EmployeeProvider extends ChangeNotifier {
   final EmployeeDatabase _employeeDatabase = EmployeeDatabase();
+  ApiService apiService=ApiService();
   List<Employee> _employees = [];
 
   List<Employee> get employees => _employees;
@@ -15,6 +15,12 @@ class EmployeeProvider extends ChangeNotifier {
   Future<void> fetchEmployees() async {
     if (_employees.isEmpty) {
       _employees = await _employeeDatabase.getEmployees();
+      notifyListeners();
+    }
+
+    if(_employees.length==0){
+      _employees=await apiService.getUsers();
+      print("updated");
       notifyListeners();
     }
   }

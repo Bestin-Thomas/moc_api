@@ -1,3 +1,4 @@
+
 class Company {
   Company({
       required this.name,

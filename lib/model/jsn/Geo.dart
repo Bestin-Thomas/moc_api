@@ -1,3 +1,5 @@
+
+
 class Geo {
   Geo({
       required this.lat,
@@ -7,7 +9,7 @@ class Geo {
     lat = json['lat'];
     lng = json['lng'];
   }
-  late String lat;
+  late  String lat;
   late String lng;
 
   Map<String, dynamic> toJson() {

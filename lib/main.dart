@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:moc_api/providerservice.dart';
 import 'package:moc_api/screen/employee_list_screen.dart';
 import 'package:provider/provider.dart';
-// import 'employee_provider.dart';
-// import 'employee_list_screen.dart';
 
 void main() => runApp(MyApp());
 
